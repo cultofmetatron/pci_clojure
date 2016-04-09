@@ -80,11 +80,15 @@
   (apply clojure.set/intersection
     (map (fn [item]  (set (keys item))) items)))
 
+; note: the original code did not perform the sqrt. this did nor make sense
+; as the preceeding code hinted at needing it so I put it in.
 (defn sim_distance
   "calculates the similarity distance between two records"
   [prefs person-1 person-2]
   (let [
-      distance (sum-of-squares
-                            (map (fn [key] (- (get-rating prefs person-2 key) (get-rating prefs person-1 key))) (shared_keys (get prefs person-1) (get prefs person-2))))
+      distance (Math/sqrt (sum-of-squares
+                            (map
+                              (fn [key] (- (get-rating prefs person-2 key) (get-rating prefs person-1 key)))
+                              (shared_keys (get prefs person-1) (get prefs person-2)))))
     ]
     (/ 1 (+ 1 distance))))
