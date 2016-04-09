@@ -8,7 +8,7 @@
 
 (defn foobar [] "foobar")
 
-
+;the critics
 (def critics {
   "Lisa Rose"    {
     "Lady in the Water"  2.5
@@ -48,11 +48,11 @@
     "You, Me and Dupree"  2.0
   }
   "Jack Matthews" {
-     "Lady in the Water"  3.0
-     "Snakes on a Plane"  4.0
-     "The Night Listener" 3.0
-     "Superman Returns"   5.0
-     "You, Me and Dupree" 3.5
+    "Lady in the Water"   3.0
+    "Snakes on a Plane"   4.0
+    "The Night Listener"  3.0
+    "Superman Returns"    5.0
+    "You, Me and Dupree"  3.5
   }
   "Toby" {
     "Snakes on a Plane"   4.5
