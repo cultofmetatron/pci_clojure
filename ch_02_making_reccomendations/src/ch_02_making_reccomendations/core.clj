@@ -1,4 +1,6 @@
 (ns ch-02-making-reccomendations.core
+  (:require clojure.set)
+  (:require [clojure.math.numeric-tower :as math])
   (:gen-class))
 
 (defn -main
@@ -60,3 +62,29 @@
     "Superman Returns"    4.0
   }
 })
+
+(defn get-rating [prefs person key]
+  (get (get prefs person) key))
+
+(defn sum-of-squares
+  "computes the sum of the squares"
+  [diffrences]
+  (reduce
+    (fn [memo diffrence] (+ memo (* diffrence diffrence)))
+    0
+    diffrences))
+
+(defn shared_keys
+  "gets the keys shared between two maps"
+  [& items]
+  (apply clojure.set/intersection
+    (map (fn [item]  (set (keys item))) items)))
+
+(defn sim_distance
+  "calculates the similarity distance between two records"
+  [prefs person-1 person-2]
+  (let [
+      distance (sum-of-squares
+                            (map (fn [key] (- (get-rating prefs person-2 key) (get-rating prefs person-1 key))) (shared_keys (get prefs person-1) (get prefs person-2))))
+    ]
+    (/ 1 (+ 1 distance))))
